@@ -36,3 +36,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Live Demo
+Check out the live version of the app here: [Todo Vue JS](https://todo-vue-js-abhirup.vercel.app/)
