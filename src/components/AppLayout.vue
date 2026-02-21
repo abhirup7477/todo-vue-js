@@ -17,12 +17,10 @@
 </template>
 
 <style scoped>
-/* Full page layout */
 .app-layout {
   min-height: 100vh;
 }
 
-/* Header styling */
 .app-header {
   display: flex;
   align-items: center;
@@ -33,18 +31,16 @@
   background: #fff;
 }
 
-/* Main area */
 .app-main {
   display: flex;
-  justify-content: center;   /* center horizontally */
-  align-items: flex-start;   /* top align content */
+  justify-content: center;   
+  align-items: flex-start;  
   padding: 24px 12px;
   background: #f5f7fa;
 }
 
-/* Centered content container */
 .content-wrapper {
   width: 100%;
-  max-width: 700px;          /* required max width */
+  max-width: 700px;        
 }
 </style>
