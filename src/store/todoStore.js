@@ -1,28 +1,37 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useTodoStore = defineStore('todo', {
-    state: () => {
+	state: () => {
         return {
             todos: JSON.parse(localStorage.getItem("todos")) || []
         }
     },
-    getters:{
+	getters:{
         getCount(){
             return this.todos.length
         }
     },
-    actions:{
-        saveToStorage(){
+	actions: {
+        getById(id) {
+            return this.todos.find(t => String(t.id) === id)
+        },
+		saveToStorage(){
             localStorage.setItem("todos", JSON.stringify(this.todos))
         },
-        addTask(title, description){
+		toggleTodo(id) {
+			const t = this.todos.find(t => t.id === id)
+			if (t) {
+				t.completed = !t.completed
+			}
+			this.saveToStorage()
+		},
+		addTask(title, description){
             const exists = this.todos.find(t => t.title === title)
             if(exists){
                 alert("Task already exists in the list!")
-                return
+                return false
             }
-            const id = this.todos.length? this.todos[this.todos.length - 1].id + 1 : 1
+            const id = Date.now()
             this.todos.push({
                 id: id,
                 title: title,
@@ -30,19 +39,21 @@ export const useTodoStore = defineStore('todo', {
                 completed: false,
             })
             this.saveToStorage()
+            return true
         },
-        removeById(id){
+		removeById(id){
             const index = this.todos.findIndex(t => t.id === id)
             if(index != -1){
                 this.todos.splice(index, 1)
                 this.saveToStorage()
             }
         },
-        removeAll(){
-            this.todos = []
+        update(todo){
+            const index = this.todos.findIndex(t => String(t.id) === String(todo.id))
+            if (index != -1){
+                this.todos[index] = {...todo}
+            }
             this.saveToStorage()
-            console.log(this.todos)
-            console.log(JSON.parse(localStorage.getItem("todos")));
-        },
-    }
+        }
+  	}
 })
