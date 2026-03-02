@@ -10,8 +10,11 @@ import 'element-plus/dist/index.css'
 let app = null
 
 export function mount(el) {
+  console.log('Mounting Vue app on:', el)
   app = createApp(App)
   app.use(router)
+  app.use(createPinia())
+  app.use(ElementPlus)
   app.mount(el)
 }
 
