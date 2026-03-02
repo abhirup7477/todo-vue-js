@@ -25,5 +25,3 @@ export function unmount() {
 if (!window.__MICRO_FRONTEND_HOST__) {
   mount('#app')
 }
-
-export {mount}
